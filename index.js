@@ -26,6 +26,29 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+
+
+
+
+    const userCollection = client.db('userDB').collection('user');
+    const dataCollection = client.db('dataDB').collection('data');
+
+    app.post('/users', async(req, res)=>{
+        const user = req.body;
+        console.log(user);
+        const result = await userCollection.insertOne(user);
+        console.log(result);
+        res.send(result)
+    })
+
+    ///add iteam data
+    app.post('/additem', async(req, res)=>{
+        console.log(req.body);
+        const item = req.body;
+        const result = await dataCollection.insertOne(item)
+        res.send(result)
+    })
+
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
