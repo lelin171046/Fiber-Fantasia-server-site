@@ -43,7 +43,7 @@ async function run() {
 
     ///add iteam data
     app.post('/additem', async (req, res) => {
-      console.log(req.body);
+      // console.log(req.body);
       const item = req.body;
       const result = await dataCollection.insertOne(item)
       res.send(result)
@@ -86,11 +86,21 @@ async function run() {
       const result = await dataCollection.updateOne(filter, item, option);
       res.send(result)
     })
+    //Subcategory filter
+    app.get('/category/:subcategory', async(req, res)=>{
+      const sub = req.params.subcategory;
+      // const sub = "Knitting";
+      const regex = new RegExp(sub, "i")
+      const result = await dataCollection.find({category:regex}).toArray();
+      console.log(result);
+      res.send(result)
+      console.log(sub,);
+    })
     //delete craft from my card
     app.delete('/myCraft/:id', async (req, res) => {
       const id = req.params.id;
       const quary = { _id: new ObjectId(id) };
-      console.log(quary);
+      // console.log(quary);
       const result = await dataCollection.deleteOne(quary);
       res.send(result)
     })
