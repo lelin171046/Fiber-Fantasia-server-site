@@ -68,23 +68,23 @@ async function run() {
       const option = { upsert: true };
       const updateItem = req.body;
       console.log(updateItem);
-      // const item = {
-      //   $set: {
-      //     name: updateItem.name,
-      //     creator: updateItem.creator,
-      //     description: updateItem.description,
-      //     publishDate: updateItem.publishDate,
-      //     imageUrl: updateItem.imageUrl,
-      //     category: updateItem.category,
-      //     price: updateItem.price,
-      //     rating: updateItem.rating,
-      //     customization: updateItem.customization,
-      //     stockStatus: updateItem.stockStatus,
+      const item = {
+        $set: {
+          name: updateItem.name,
+          creator: updateItem.creator,
+          description: updateItem.description,
+          publishDate: updateItem.publishDate,
+          imageUrl: updateItem.imageUrl,
+          category: updateItem.category,
+          price: updateItem.price,
+          rating: updateItem.rating,
+          customization: updateItem.customization,
+          stockStatus: updateItem.stockStatus,
 
-      //   }
-      // };
-      // const result = await dataCollection.updateOne(filter, item, option);
-      // res.send(result)
+        }
+      };
+      const result = await dataCollection.updateOne(filter, item, option);
+      res.send(result)
     })
     //delete craft from my card
     app.delete('/myCraft/:id', async (req, res) => {
