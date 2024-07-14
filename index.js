@@ -67,7 +67,7 @@ async function run() {
       const filter = { _id: new ObjectId(id) };
       const option = { upsert: true };
       const updateItem = req.body;
-      console.log(updateItem);
+      console.log(updateItem,'hhghtdhdf');
       const item = {
         $set: {
           name: updateItem.name,
@@ -83,9 +83,9 @@ async function run() {
 
         }
       };
-      const result = await dataCollection.updateOne(filter, item, option);
-      res.send(result)
+      
     })
+
     //Subcategory filter
     app.get('/category/:subcategory', async(req, res)=>{
       const sub = req.params.subcategory;
