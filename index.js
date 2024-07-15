@@ -11,7 +11,7 @@ const port = process.env.PORT || 5001;
 //   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 // }));
 app.use(cors({
-  origin: ['https://fiberfantasia-auth.web.app', 'https://fiberfantasia-auth.firebaseapp.com']
+  origin: ['https://fiberfantasia-auth.web.app', 'http://localhost:5173']
 }));
 app.use(express.json());
 
