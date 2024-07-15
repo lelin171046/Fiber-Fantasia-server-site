@@ -10,12 +10,25 @@ const port = process.env.PORT || 5001;
 //   origin: 'http://localhost:5173', // Allow this origin
 //   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 // }));
+// app.use(cors({
+//   origin: 'http://localhost:5173',
+//   credentials: true,
+//   methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+// }));
 app.use(cors({
-  origin: ['https://fiberfantasia-auth.web.app', 'http://localhost:5173']
+  origin: 'https://fiberfantasia-auth.web.app',
+  credentials: true,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 }));
 app.use(express.json());
 
+// const corsOptions ={
+//   origin:'*', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200,
+// }
 
+// app.use(cors(corsOptions)) 
 
 
 
@@ -38,7 +51,7 @@ async function run() {
 
     const userCollection = client.db('userDB').collection('user');
     const dataCollection = client.db('dataDB').collection('data');
-    //uplaoadin user data
+    //uplaoading user data
     app.post('/users', async (req, res) => {
       const user = req.body;
       console.log(user);
@@ -49,7 +62,7 @@ async function run() {
 
     ///add iteam data
     app.post('/additem', async (req, res) => {
-      // console.log(req.body);
+      console.log(req.body);
       const item = req.body;
       const result = await dataCollection.insertOne(item)
       res.send(result)
