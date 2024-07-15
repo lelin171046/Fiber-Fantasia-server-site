@@ -6,7 +6,13 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 // Middleware
-app.use(cors());
+// app.use(cors({
+//   origin: 'http://localhost:5173', // Allow this origin
+//   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+// }));
+app.use(cors({
+  origin: ['https://fiberfantasia-auth.web.app', 'https://fiberfantasia-auth.firebaseapp.com']
+}));
 app.use(express.json());
 
 
@@ -85,15 +91,15 @@ async function run() {
       };
       const result = await dataCollection.updateOne(filter, item, option);
       res.send(result)
-      
+
     })
 
     //Subcategory filter
-    app.get('/category/:subcategory', async(req, res)=>{
+    app.get('/category/:subcategory', async (req, res) => {
       const sub = req.params.subcategory;
       // const sub = "Knitting";
       const regex = new RegExp(sub, "i")
-      const result = await dataCollection.find({category:regex}).toArray();
+      const result = await dataCollection.find({ category: regex }).toArray();
       // console.log(result);
       res.send(result)
       // console.log(sub,);
@@ -118,7 +124,7 @@ async function run() {
       res.send(result);
     })
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
