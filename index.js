@@ -16,19 +16,11 @@ const port = process.env.PORT || 5001;
 //   methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 // }));
 app.use(cors({
-  origin: 'https://fiberfantasia-auth.web.app',
+  origin: ['http://localhost:5173', 'https://fiberfantasia-auth.web.app'],
   credentials: true,
-  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  // methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
 }));
 app.use(express.json());
-
-// const corsOptions ={
-//   origin:'*', 
-//   credentials:true,            //access-control-allow-credentials:true
-//   optionSuccessStatus:200,
-// }
-
-// app.use(cors(corsOptions)) 
 
 
 
