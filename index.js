@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 
-const uri = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster0.0f5vnoo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_Users}:${process.env.DB_Passs}@cluster0.0f5vnoo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -67,7 +67,7 @@ async function run() {
       const filter = { _id: new ObjectId(id) };
       const option = { upsert: true };
       const updateItem = req.body;
-      console.log(updateItem,'hhghtdhdf');
+      // console.log(updateItem,'hhghtdhdf');
       const item = {
         $set: {
           name: updateItem.name,
@@ -83,6 +83,8 @@ async function run() {
 
         }
       };
+      const result = await dataCollection.updateOne(filter, item, option);
+      res.send(result)
       
     })
 
@@ -92,9 +94,9 @@ async function run() {
       // const sub = "Knitting";
       const regex = new RegExp(sub, "i")
       const result = await dataCollection.find({category:regex}).toArray();
-      console.log(result);
+      // console.log(result);
       res.send(result)
-      console.log(sub,);
+      // console.log(sub,);
     })
     //delete craft from my card
     app.delete('/myCraft/:id', async (req, res) => {
@@ -111,7 +113,7 @@ async function run() {
     app.get('/allCraft/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      console.log(query);
+      // console.log(query);
       const result = await dataCollection.findOne(query);
       res.send(result);
     })
